@@ -10,12 +10,6 @@ export function List(): ReactElement {
     setContacts(getContacts())
   }, [])
 
-  function calculateAge(dateOfBirth: string): number {
-    const ageInMilliseconds = Date.now() - Date.parse(dateOfBirth)
-    const ageDate = new Date(ageInMilliseconds)
-    return Math.abs(ageDate.getUTCFullYear() - 1970)
-  }
-
   function handleSelection(event): void {
     const { id } = event.target
     if (id === selected) {
@@ -28,6 +22,12 @@ export function List(): ReactElement {
   function handleDelete(): void {
     deleteContact(selected)
     setContacts(getContacts())
+  }
+
+  function calculateAge(dateOfBirth: string): number {
+    const ageInMilliseconds = Date.now() - Date.parse(dateOfBirth)
+    const ageDate = new Date(ageInMilliseconds)
+    return Math.abs(ageDate.getUTCFullYear() - 1970)
   }
 
   return (

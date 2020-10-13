@@ -47,10 +47,9 @@ export function Form(props: Form): ReactElement {
   function handleChange(event): void {
     const { name, value, type } = event.target
     setValues({ ...values, [name]: value })
-    // FIXME: dateOfBirth is working with one step lag
 
     switch (type) {
-      case 'text':
+      case FieldType.TEXT:
         if (value.length < 2) {
           setValidity({ ...validity, [name]: false })
         } else {
@@ -58,8 +57,20 @@ export function Form(props: Form): ReactElement {
         }
         break
 
-      case 'tel':
+      case FieldType.PHONE:
         setValidity({ ...validity, [name]: !isNaN(value) })
+        break
+
+      case FieldType.DATE:
+        if (value === '') {
+          setValidity({ ...validity, [name]: true })
+        } else {
+          setValidity({
+            ...validity,
+            [name]: Date.now() - Date.parse(value) > 0,
+          })
+        }
+        break
     }
   }
 

@@ -22,6 +22,7 @@ export const defaultConfig: FormConfig = {
       type: FieldType.DATE,
       name: 'dateOfBirth',
       required: false,
+      validationMessage: "Your contact can't be born in the future",
     },
   ],
 }
