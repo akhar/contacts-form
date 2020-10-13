@@ -48,4 +48,6 @@ TEXT fields should contain more than 1 symbol.
 
 PHONE fields should contain numbers only.
 
+DATE should be before of now.
+
 You can use your own validation messages by providing `validationMessage` at Form config.
