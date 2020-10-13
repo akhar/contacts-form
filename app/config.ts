@@ -1,7 +1,7 @@
 import { FieldType, FormConfig } from '../lib/Form'
 
-export const defaultConfig: FormConfig = {
-  submitLabel: 'submit',
+export const config: FormConfig = {
+  submitLabel: 'Submit',
   fields: [
     {
       label: 'Name',

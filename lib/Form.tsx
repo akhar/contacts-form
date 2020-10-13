@@ -1,5 +1,5 @@
 import React, { Fragment, ReactElement, useState } from 'react'
-import { Contact } from '../app/api'
+import { Contact } from '../app/model'
 
 export enum FieldType {
   TEXT = 'text',
@@ -44,10 +44,7 @@ export function Form(props: Form): ReactElement {
     return result || validity[field.name]
   }, false)
 
-  function handleChange(event): void {
-    const { name, value, type } = event.target
-    setValues({ ...values, [name]: value })
-
+  function validation(type: FieldType, name: string, value: string): void {
     switch (type) {
       case FieldType.TEXT:
         if (value.length < 2) {
@@ -58,7 +55,7 @@ export function Form(props: Form): ReactElement {
         break
 
       case FieldType.PHONE:
-        setValidity({ ...validity, [name]: !isNaN(value) })
+        setValidity({ ...validity, [name]: !isNaN(Number(value)) })
         break
 
       case FieldType.DATE:
@@ -72,6 +69,13 @@ export function Form(props: Form): ReactElement {
         }
         break
     }
+  }
+
+  function handleChange(event): void {
+    const { name, value, type } = event.target
+
+    validation(type, name, value)
+    setValues({ ...values, [name]: value })
   }
 
   function handleSubmit(): void {

@@ -1,3 +1,13 @@
+#### Installation
+Clone `https://github.com/akhar/contacts-form.git` 
+
+Install dependencies `npm install`
+
+Run local dev server `npm start`
+
+Open [http://localhost:1234/]()
+ 
+
 #### Form configuration
 
 You should pass configuration object to the `Form` component alongside with `onSubmit` function

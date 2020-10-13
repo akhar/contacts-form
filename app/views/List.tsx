@@ -1,13 +1,14 @@
 import React, { Fragment, ReactElement, useState, useEffect } from 'react'
-import { Contact, deleteContact, getContacts } from '../api'
+import { deleteContact, getAllContacts } from '../communication/api'
 import { Link } from 'react-router-dom'
+import { Contact } from '../model'
 
 export function List(): ReactElement {
   const [contacts, setContacts] = useState([])
   const [selected, setSelected] = useState('')
 
   useEffect(() => {
-    setContacts(getContacts())
+    setContacts(getAllContacts())
   }, [])
 
   function handleSelection(event): void {
@@ -21,7 +22,7 @@ export function List(): ReactElement {
 
   function handleDelete(): void {
     deleteContact(selected)
-    setContacts(getContacts())
+    setContacts(getAllContacts())
   }
 
   function calculateAge(dateOfBirth: string): number {
@@ -32,7 +33,7 @@ export function List(): ReactElement {
 
   return (
     <Fragment>
-      <h2>Contacts:</h2>
+      <h3>Contacts</h3>
       {contacts.map((contact: Contact) => {
         const { name, phone, dateOfBirth, id } = contact
         return (

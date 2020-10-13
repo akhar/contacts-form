@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import { Form } from '../../lib/Form'
-import { defaultConfig } from '../config'
-import { addContact, Contact } from '../api'
+import { config } from '../config'
+import { addContact } from '../communication/api'
+import { Contact } from '../model'
 
 export function Add() {
   const history = useHistory()
@@ -14,8 +15,11 @@ export function Add() {
 
   return (
     <Fragment>
-      <h2>Add new contact</h2>
-      <Form config={defaultConfig} onSubmit={onSubmit} />
+      <h3>Add a new contact</h3>
+      <Form config={config} onSubmit={onSubmit} />
+      <Link to="/">
+        <button>Cancel</button>
+      </Link>
     </Fragment>
   )
 }
