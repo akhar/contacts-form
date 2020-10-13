@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contacts</title>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="app.tsx"></script>
+  </body>
+  <style>
+    .formRow {
+      margin-bottom: 10px;
+    }
+    .validationMessage {
+      color: firebrick;
+    }
+    .required:after {
+      content:" *";
+      color: firebrick;
+      margin-left: -5px;
+    }
+    label {
+      margin-right: 10px;
+    }
+  </style>
+</html>
