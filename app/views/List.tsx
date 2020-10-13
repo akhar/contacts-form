@@ -1,9 +1,14 @@
-import React, { Fragment, ReactElement } from 'react'
-import { Contact, getContacts } from '../api'
+import React, { Fragment, ReactElement, useState, useEffect } from 'react'
+import { Contact, deleteContact, getContacts } from '../api'
 import { Link } from 'react-router-dom'
 
 export function List(): ReactElement {
-  const contacts: Contact[] = getContacts()
+  const [contacts, setContacts] = useState([])
+  const [selected, setSelected] = useState('')
+
+  useEffect(() => {
+    setContacts(getContacts())
+  }, [])
 
   function calculateAge(dateOfBirth: string): number {
     const ageInMilliseconds = Date.now() - Date.parse(dateOfBirth)
@@ -12,8 +17,17 @@ export function List(): ReactElement {
   }
 
   function handleSelection(event): void {
-    const { id } = event.target.id
-    console.debug(id)
+    const { id } = event.target
+    if (id === selected) {
+      setSelected('')
+    } else {
+      setSelected(id)
+    }
+  }
+
+  function handleDelete(): void {
+    deleteContact(selected)
+    setContacts(getContacts())
   }
 
   return (
@@ -22,7 +36,12 @@ export function List(): ReactElement {
       {contacts.map((contact: Contact) => {
         const { name, phone, dateOfBirth, id } = contact
         return (
-          <p key={id} id={id} onClick={handleSelection}>
+          <p
+            key={id}
+            id={id}
+            onClick={handleSelection}
+            className={selected === id ? 'selected listItem' : 'listItem'}
+          >
             {name} {dateOfBirth && `(${calculateAge(dateOfBirth)} y.o.) `}
             {phone}
           </p>
@@ -32,6 +51,7 @@ export function List(): ReactElement {
       <Link to="/add">
         <button>Add</button>
       </Link>
+      {selected && <button onClick={handleDelete}>Delete selected</button>}
     </Fragment>
   )
 }

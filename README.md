@@ -1,4 +1,4 @@
-####Form configuration
+#### Form configuration
 
 You should pass configuration object to the `Form` component alongside with `onSubmit` function
 
@@ -7,7 +7,7 @@ You should pass configuration object to the `Form` component alongside with `onS
 ```
 See example at `app/config.ts`
 
-####Configuration schema
+#### Configuration schema
 
 ```typescript
 type FormConfig = {
